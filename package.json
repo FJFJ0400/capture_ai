@@ -1,0 +1,17 @@
+{
+  "name": "capture-ai",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter @capture-ai/shared --filter @capture-ai/web --filter @capture-ai/api --filter @capture-ai/worker --parallel dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm --filter @capture-ai/shared test",
+    "db:migrate": "pnpm --filter @capture-ai/api db:migrate",
+    "db:generate": "pnpm -r db:generate",
+    "postinstall": "pnpm -r db:generate"
+  }
+}

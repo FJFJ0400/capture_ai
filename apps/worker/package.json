@@ -1,0 +1,31 @@
+{
+  "name": "@capture-ai/worker",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "tsx watch src/worker.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/worker.js",
+    "lint": "echo \"(skip)\"",
+    "db:generate": "prisma generate --schema ../api/prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@capture-ai/shared": "workspace:*",
+    "@aws-sdk/client-s3": "^3.626.0",
+    "@prisma/client": "^5.18.0",
+    "bullmq": "^5.7.0",
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1",
+    "tesseract.js": "^5.0.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "prisma": "^5.18.0",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
+  },
+  "prisma": {
+    "schema": "../api/prisma/schema.prisma"
+  }
+}

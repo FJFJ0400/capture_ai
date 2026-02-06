@@ -1,0 +1,31 @@
+node_modules/
+dist/
+.next/
+.env
+.env.*
+!.env.example
+!.env.production.example
+storage/local/
+.DS_Store
+
+# Logs
+*.log
+*.err.log
+
+# PID files
+.api_pid
+.dev_pids
+.prod_backend_pids
+.prod_pids
+.prod_web_pid
+
+# Temp files
+tmp-*.png
+hello.txt
+.mobile_file_name
+
+# Binary tools
+tools/
+
+# Build artifacts
+apps/web/tsconfig.tsbuildinfo

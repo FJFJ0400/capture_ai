@@ -1,0 +1,71 @@
+services:
+  # ── API Server (Fastify) ──────────────────────────────
+  - type: web
+    name: capture-ai-api
+    runtime: node
+    plan: free
+    buildCommand: |
+      pnpm install &&
+      pnpm --filter @capture-ai/shared build &&
+      pnpm --filter @capture-ai/api build &&
+      cd apps/api && npx prisma generate && npx prisma migrate deploy
+    startCommand: node apps/api/dist/server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: PORT
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: API_KEY
+        sync: false
+      - key: LOG_LEVEL
+        value: info
+      - key: STORAGE_DRIVER
+        value: local
+      - key: STORAGE_LOCAL_PATH
+        value: ./storage/local
+      - key: STORAGE_ENCRYPTION_KEY
+        sync: false
+      - key: MAX_UPLOAD_BYTES
+        value: "10485760"
+      - key: ALLOWED_MIME_TYPES
+        value: image/png,image/jpeg,image/webp
+
+  # ── Background Worker (BullMQ) ────────────────────────
+  - type: worker
+    name: capture-ai-worker
+    runtime: node
+    plan: free
+    buildCommand: |
+      pnpm install &&
+      pnpm --filter @capture-ai/shared build &&
+      pnpm --filter @capture-ai/worker build &&
+      cd apps/worker && npx prisma generate --schema ../api/prisma/schema.prisma
+    startCommand: node apps/worker/dist/worker.js
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: API_KEY
+        sync: false
+      - key: LOG_LEVEL
+        value: info
+      - key: STORAGE_DRIVER
+        value: local
+      - key: STORAGE_LOCAL_PATH
+        value: ./storage/local
+      - key: STORAGE_ENCRYPTION_KEY
+        sync: false
+      - key: OCR_ADAPTER
+        value: tesseract
+      - key: OCR_LANG
+        value: eng
+      - key: OCR_TIMEOUT_MS
+        value: "20000"

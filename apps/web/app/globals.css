@@ -1,0 +1,371 @@
+﻿:root {
+  --bg: #f7f2e8;
+  --bg-accent: #fbe9d4;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --accent: #ff7847;
+  --accent-dark: #c94b1b;
+  --card: #ffffff;
+  --line: rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-space), "Space Grotesk", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, rgba(255, 120, 71, 0.12), transparent 55%),
+    radial-gradient(circle at 20% 50%, rgba(58, 110, 165, 0.16), transparent 50%),
+    var(--bg);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+.app-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.app-nav {
+  display: flex;
+  gap: 16px;
+}
+
+.app-nav a {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  font-weight: 600;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.4s ease;
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.dropzone {
+  border: 2px dashed rgba(0, 0, 0, 0.15);
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(255, 120, 71, 0.08), rgba(58, 110, 165, 0.06));
+}
+
+.dropzone.dragging {
+  border-color: var(--accent);
+  background: rgba(255, 120, 71, 0.14);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--bg-accent);
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+.list-item-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.list-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.list-item-actions .button {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.quick-files {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.quick-file-item {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 13px;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.image-preview {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  object-fit: contain;
+  background: #fafafa;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+
+.todo-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.todo-title input {
+  width: 18px;
+  height: 18px;
+}
+
+.todo-title.done strong {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.todo-actions .button {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.quick-save-bar {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.chat-layout {
+  display: grid;
+  gap: 16px;
+}
+
+.chat-thread {
+  display: grid;
+  gap: 12px;
+  max-height: 58vh;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.chat-bubble {
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  padding: 12px;
+}
+
+.chat-bubble.user {
+  background: rgba(255, 120, 71, 0.14);
+}
+
+.chat-bubble.assistant {
+  background: rgba(58, 110, 165, 0.1);
+}
+
+.chat-bubble pre {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+  font-family: inherit;
+  line-height: 1.45;
+}
+
+.chat-ref-list {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.chat-ref-item {
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--card);
+  display: grid;
+  gap: 2px;
+}
+
+.chat-ref-item span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.chat-followups {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chat-input-row .input {
+  flex: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chat-input-row {
+    flex-direction: column;
+  }
+}

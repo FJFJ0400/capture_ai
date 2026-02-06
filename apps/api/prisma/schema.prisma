@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CaptureStatus {
+  UPLOADED
+  PROCESSING
+  DONE
+  FAILED
+}
+
+enum CaptureCategory {
+  receipt
+  reservation
+  document
+  chat
+  study
+  shopping
+  finance
+  misc
+}
+
+model CaptureItem {
+  id                String           @id @default(cuid())
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  originalFilename  String
+  mimeType          String
+  sizeBytes         Int
+  storageKey        String
+  fileHash          String           @unique
+  status            CaptureStatus
+  category          CaptureCategory?
+  summary           String?          @db.Text
+  purposeSummary    String?          @db.Text
+  purposeChecklist  String[]         @default([])
+  ocrText           String?          @db.Text
+  tags              String[]
+  actionSuggestions Json?
+  failureReason     String?
+  purposeId         String?
+  todos             TodoItem[]
+  purpose           CapturePurpose?  @relation(fields: [purposeId], references: [id])
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([category])
+  @@index([purposeId])
+}
+
+model CapturePurpose {
+  id             String       @id @default(cuid())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  name           String
+  description    String?
+  instruction    String       @db.Text
+  sampleKeywords String[]     @default([])
+  isDefault      Boolean      @default(false)
+  isActive       Boolean      @default(true)
+  captures       CaptureItem[]
+
+  @@index([isDefault])
+  @@index([isActive])
+}
+
+model TodoItem {
+  id              String      @id @default(cuid())
+  createdAt       DateTime    @default(now())
+  title           String
+  sourceCaptureId String?
+  done            Boolean     @default(false)
+  capture         CaptureItem? @relation(fields: [sourceCaptureId], references: [id])
+
+  @@index([createdAt])
+  @@index([done])
+}

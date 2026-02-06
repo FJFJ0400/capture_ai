@@ -1,0 +1,6 @@
+{
+  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "cd ../.. && pnpm --filter @capture-ai/shared build && pnpm --filter @capture-ai/web build",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}

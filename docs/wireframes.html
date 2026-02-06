@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Capture AI Agent Wireframes</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap");
+
+      :root {
+        --bg: #f7f1e7;
+        --bg-2: #efe5d3;
+        --ink: #1b1b1b;
+        --muted: #6d6151;
+        --accent: #1c6b4f;
+        --accent-2: #b9572b;
+        --card: #fffaf2;
+        --line: #d8c9b3;
+        --shadow: 0 20px 45px rgba(27, 27, 27, 0.12);
+        --dash: 2px dashed #c8b89f;
+        --radius: 18px;
+        --radius-sm: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Space Grotesk", "Noto Sans KR", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at top, var(--bg-2), var(--bg) 60%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px 96px;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+
+      header h1 {
+        font-size: clamp(28px, 4vw, 44px);
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+
+      header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .pill {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        font-size: 13px;
+      }
+
+      section {
+        margin-top: 40px;
+      }
+
+      section h2 {
+        font-size: 22px;
+        margin: 0 0 16px;
+      }
+
+      .frame {
+        background: var(--card);
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        padding: 24px;
+      }
+
+      .frame + .frame {
+        margin-top: 20px;
+      }
+
+      .frame-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+        gap: 12px;
+      }
+
+      .frame-title h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .box {
+        border: var(--dash);
+        border-radius: var(--radius-sm);
+        padding: 14px;
+        background: #fff;
+        min-height: 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .box.small {
+        min-height: 32px;
+        padding: 10px 12px;
+      }
+
+      .box strong {
+        font-size: 14px;
+      }
+
+      .label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .status {
+        display: inline-flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        border: 1px solid var(--line);
+        background: #fdf7ee;
+      }
+
+      .chip.accent {
+        border-color: rgba(28, 107, 79, 0.4);
+        color: var(--accent);
+      }
+
+      .chip.alert {
+        border-color: rgba(185, 87, 43, 0.4);
+        color: var(--accent-2);
+      }
+
+      .state-row {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .state {
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        padding: 12px;
+        background: #fff5e6;
+        font-size: 13px;
+      }
+
+      .state strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .footer {
+        margin-top: 48px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 900px) {
+        .grid.two,
+        .grid.three {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Capture AI Agent Wireframes</h1>
+        <p>업로드 → 인입함 → 상세 → TODO로 이어지는 핵심 화면을 시각화한 HTML 와이어프레임입니다.</p>
+        <nav>
+          <a class="pill" href="#inbox">인입함</a>
+          <a class="pill" href="#detail">상세</a>
+          <a class="pill" href="#todos">TODO</a>
+          <a class="pill" href="#settings">설정</a>
+        </nav>
+      </header>
+
+      <section id="inbox">
+        <h2>인입함</h2>
+        <div class="frame">
+          <div class="frame-title">
+            <h3>업로드 + 검색 + 리스트</h3>
+            <div class="status">
+              <span class="chip accent">UPLOADED</span>
+              <span class="chip">PROCESSING</span>
+              <span class="chip">DONE</span>
+              <span class="chip alert">FAILED</span>
+            </div>
+          </div>
+          <div class="grid two">
+            <div class="box">
+              <span class="label">Upload Zone</span>
+              <strong>드래그 & 드롭</strong>
+              <div class="box small">파일 선택 버튼</div>
+              <div class="box small">PNG/JPG/WEBP · 10MB</div>
+            </div>
+            <div class="box">
+              <span class="label">Search & Filters</span>
+              <div class="grid two">
+                <div class="box small">키워드 검색</div>
+                <div class="box small">카테고리</div>
+                <div class="box small">상태</div>
+                <div class="box small">기간</div>
+              </div>
+              <div class="box small">필터 적용</div>
+            </div>
+          </div>
+          <div class="box" style="margin-top: 16px;">
+            <span class="label">Inbox List</span>
+            <div class="grid three">
+              <div class="box small">카드: 썸네일 + 요약 + 상태</div>
+              <div class="box small">카드: 태그 + 날짜</div>
+              <div class="box small">카드: 실패 시 재처리</div>
+            </div>
+          </div>
+        </div>
+        <div class="frame">
+          <div class="frame-title">
+            <h3>상태 패널</h3>
+          </div>
+          <div class="state-row">
+            <div class="state"><strong>빈 상태</strong>업로드 CTA와 사용 예시를 노출</div>
+            <div class="state"><strong>로딩</strong>리스트 스켈레톤과 비활성화</div>
+            <div class="state"><strong>오류</strong>에러 배너 + 이전 데이터 유지</div>
+            <div class="state"><strong>필터 없음</strong>필터 초기화 CTA 제공</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="detail">
+        <h2>상세</h2>
+        <div class="frame">
+          <div class="frame-title">
+            <h3>캡처 상세</h3>
+            <div class="status">
+              <span class="chip">요약/태그/액션</span>
+              <span class="chip">OCR 토글</span>
+            </div>
+          </div>
+          <div class="grid two">
+            <div class="box">
+              <span class="label">Original Preview</span>
+              <div class="box small">이미지 영역</div>
+              <div class="box small">이미지 실패 메시지</div>
+            </div>
+            <div class="box">
+              <span class="label">Metadata</span>
+              <div class="box small">파일명 + 날짜 + 상태</div>
+              <div class="box small">요약 / 카테고리 / 태그</div>
+              <div class="box small">OCR 텍스트 보기</div>
+              <div class="box small">추천 액션 버튼 리스트</div>
+            </div>
+          </div>
+        </div>
+        <div class="frame">
+          <div class="frame-title">
+            <h3>상태 패널</h3>
+          </div>
+          <div class="state-row">
+            <div class="state"><strong>대기</strong>요약/태그/액션은 플레이스홀더</div>
+            <div class="state"><strong>FAILED</strong>재처리 버튼 노출</div>
+            <div class="state"><strong>NOT_FOUND</strong>인입함 이동 CTA</div>
+            <div class="state"><strong>저장 중</strong>액션 버튼 비활성화</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="todos">
+        <h2>TODO</h2>
+        <div class="frame">
+          <div class="frame-title">
+            <h3>Todo 리스트</h3>
+            <div class="status">
+              <span class="chip">OPEN</span>
+              <span class="chip accent">DONE</span>
+            </div>
+          </div>
+          <div class="grid two">
+            <div class="box">
+              <span class="label">Add Todo</span>
+              <div class="box small">입력 필드</div>
+              <div class="box small">추가 버튼</div>
+            </div>
+            <div class="box">
+              <span class="label">List</span>
+              <div class="box small">아이템: 제목 + 생성일</div>
+              <div class="box small">아이템: 상태 배지</div>
+            </div>
+          </div>
+        </div>
+        <div class="frame">
+          <div class="frame-title">
+            <h3>상태 패널</h3>
+          </div>
+          <div class="state-row">
+            <div class="state"><strong>빈 상태</strong>입력 CTA 노출</div>
+            <div class="state"><strong>로딩</strong>스켈레톤 표시</div>
+            <div class="state"><strong>오류</strong>에러 배너 표시</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="settings">
+        <h2>설정</h2>
+        <div class="frame">
+          <div class="frame-title">
+            <h3>환경 설정</h3>
+          </div>
+          <div class="grid two">
+            <div class="box">
+              <span class="label">API Key</span>
+              <div class="box small">키 표시 / 복사</div>
+              <div class="box small">재발급(옵션)</div>
+            </div>
+            <div class="box">
+              <span class="label">Storage & Policy</span>
+              <div class="box small">허용 확장자</div>
+              <div class="box small">최대 용량</div>
+              <div class="box small">저장 위치</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="footer">Wireframe HTML은 기획 검토용이며 실제 UI 구현과 분리됩니다.</p>
+    </main>
+  </body>
+</html>

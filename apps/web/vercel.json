@@ -1,0 +1,6 @@
+{
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter @capture-ai/shared build && cd apps/web && next build",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}

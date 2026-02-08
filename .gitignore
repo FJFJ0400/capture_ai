@@ -29,3 +29,5 @@ tools/
 
 # Build artifacts
 apps/web/tsconfig.tsbuildinfo
+
+.vercel

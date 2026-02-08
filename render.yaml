@@ -1,4 +1,17 @@
+databases:
+  - name: capture-ai-db
+    plan: free
+    databaseName: capture_ai
+    user: capture_ai_user
+
 services:
+  # ── Redis ────────────────────────────────────────────
+  - type: redis
+    name: capture-ai-redis
+    plan: free
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
+
   # ── API Server (Fastify) ──────────────────────────────
   - type: web
     name: capture-ai-api
@@ -14,26 +27,33 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "20"
-      - key: PORT
-        sync: false
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: capture-ai-db
+          property: connectionString
       - key: REDIS_URL
-        sync: false
+        fromService:
+          name: capture-ai-redis
+          type: redis
+          property: connectionString
       - key: API_KEY
-        sync: false
+        generateValue: true
       - key: LOG_LEVEL
         value: info
       - key: STORAGE_DRIVER
         value: local
       - key: STORAGE_LOCAL_PATH
-        value: ./storage/local
+        value: /data/storage
       - key: STORAGE_ENCRYPTION_KEY
-        sync: false
+        generateValue: true
       - key: MAX_UPLOAD_BYTES
         value: "10485760"
       - key: ALLOWED_MIME_TYPES
         value: image/png,image/jpeg,image/webp
+    disk:
+      name: capture-storage
+      mountPath: /data/storage
+      sizeGB: 1
 
   # ── Background Worker (BullMQ) ────────────────────────
   - type: worker
@@ -50,22 +70,31 @@ services:
       - key: NODE_VERSION
         value: "20"
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: capture-ai-db
+          property: connectionString
       - key: REDIS_URL
-        sync: false
+        fromService:
+          name: capture-ai-redis
+          type: redis
+          property: connectionString
       - key: API_KEY
-        sync: false
+        generateValue: true
       - key: LOG_LEVEL
         value: info
       - key: STORAGE_DRIVER
         value: local
       - key: STORAGE_LOCAL_PATH
-        value: ./storage/local
+        value: /data/storage
       - key: STORAGE_ENCRYPTION_KEY
-        sync: false
+        generateValue: true
       - key: OCR_ADAPTER
         value: tesseract
       - key: OCR_LANG
         value: eng
       - key: OCR_TIMEOUT_MS
         value: "20000"
+    disk:
+      name: worker-storage
+      mountPath: /data/storage
+      sizeGB: 1
